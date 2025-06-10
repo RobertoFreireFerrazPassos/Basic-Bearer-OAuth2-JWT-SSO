@@ -1,0 +1,283 @@
+{
+	"info": {
+		"_postman_id": "73e3b10a-31be-4756-be7c-1ee15793f024",
+		"name": "Tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "33874784"
+	},
+	"item": [
+		{
+			"name": "Login adminuser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonResponse = pm.response.json();\r",
+							"    var token = jsonResponse.token;\r",
+							"    var refreshToken = jsonResponse.refreshToken;    \r",
+							"    pm.environment.set(\"authToken\", token);\r",
+							"    pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\" : \"adminuser\",\r\n    \"Password\" : \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5179/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5179",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login basicuser",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    var jsonResponse = pm.response.json();\r",
+							"    var token = jsonResponse.token;\r",
+							"    var refreshToken = jsonResponse.refreshToken;\r",
+							"    pm.environment.set(\"authToken\", token);\r",
+							"    pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"}"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\" : \"basicuser\",\r\n    \"Password\" : \"password\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5179/api/auth/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5179",
+					"path": [
+						"api",
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Refresh Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"RefreshToken\" : \"{{refreshToken}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5179/api/auth/refreshtoken",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5179",
+					"path": [
+						"api",
+						"auth",
+						"refreshtoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Logout",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"Username\" : \"basicuser\" // adminuser\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5179/api/auth/logout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5179",
+					"path": [
+						"api",
+						"auth",
+						"logout"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5245/api/tasks/alltasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5245",
+					"path": [
+						"api",
+						"tasks",
+						"alltasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all basic tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5245/api/tasks/basictasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5245",
+					"path": [
+						"api",
+						"tasks",
+						"basictasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get all default tasks",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{authToken}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5245/api/tasks/defaulttasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5245",
+					"path": [
+						"api",
+						"tasks",
+						"defaulttasks"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

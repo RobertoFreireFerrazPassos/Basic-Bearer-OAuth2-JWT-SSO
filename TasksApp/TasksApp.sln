@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35527.113 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AuthAPI", "AuthAPI", "{841FB90A-2590-4646-966F-3B6683466A34}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "TasksAPI", "TasksAPI", "{EDC8F0DC-1BAA-499B-847F-8740A0998FDA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TasksAPI", "TasksAPI\TasksAPI.csproj", "{4930A717-2586-4B79-BDCC-FDDA321F9959}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthAPI", "AuthAPI\AuthAPI.csproj", "{E3333AC2-BD33-486D-814E-D8A4FEE8BC06}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4930A717-2586-4B79-BDCC-FDDA321F9959}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4930A717-2586-4B79-BDCC-FDDA321F9959}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4930A717-2586-4B79-BDCC-FDDA321F9959}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4930A717-2586-4B79-BDCC-FDDA321F9959}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3333AC2-BD33-486D-814E-D8A4FEE8BC06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3333AC2-BD33-486D-814E-D8A4FEE8BC06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3333AC2-BD33-486D-814E-D8A4FEE8BC06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3333AC2-BD33-486D-814E-D8A4FEE8BC06}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{4930A717-2586-4B79-BDCC-FDDA321F9959} = {EDC8F0DC-1BAA-499B-847F-8740A0998FDA}
+		{E3333AC2-BD33-486D-814E-D8A4FEE8BC06} = {841FB90A-2590-4646-966F-3B6683466A34}
+	EndGlobalSection
+EndGlobal
