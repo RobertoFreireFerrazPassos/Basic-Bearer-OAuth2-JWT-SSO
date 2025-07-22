@@ -1,6 +1,14 @@
+# Basic
+
+# Bearer
+
+# OAuth2
+
+# SSO
+
 # JWT
 
-# Authentication
+## Authentication
 
 Client gets "401 Unauthorized" if:
 
@@ -10,7 +18,7 @@ Client gets "401 Unauthorized" if:
 
 "401 Unauthorized" status code indicates that the request lacks valid authentication credentials. 
 
-# Authorization
+## Authorization
 
 Client gets "403 Forbidden" if:
 
@@ -18,7 +26,7 @@ Client gets "403 Forbidden" if:
 
 "403 Forbidden" status code signifies that the server understands the request but refuses to fulfill it.
 
-## API Authorize validations
+### API Authorize validations
 
 Endpoint:
 
@@ -26,20 +34,20 @@ Endpoint:
 * [Authorize]: There is Authentication
 * [Authorize(Roles = "Admin")]: There is Authentication and Admin Role Authorization
 
-# JWT JSON
+## JWT JSON
 
 signature is used to validate if the JWT is valid
 
 ![JWT](./image-1.png)
 
-# Flow
+## Flow
 
 * Client sends user credentials and server sends back JWT to client if user is authenticated
 * Client sends request to server with JWT for a protected resource/endpoint and JWT returns response or 401/403 status code
 
 ![JWT flow](./image-2.png)
 
-# Refresh tokens 
+## Refresh tokens 
 
 Instead of providing the user with an access token that has a long expiration time, issue a short-lived access token along with a refresh token
 
