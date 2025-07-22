@@ -1,4 +1,4 @@
-﻿namespace AuthAPI.Models;
+﻿namespace AuthAPI.Dtos;
 
 public class UserDto
 {

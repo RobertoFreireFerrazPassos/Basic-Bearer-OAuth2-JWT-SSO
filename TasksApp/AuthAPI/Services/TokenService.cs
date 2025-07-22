@@ -5,7 +5,7 @@ public class TokenService(
 {
     private const string _delimiter = "-----";
 
-    public string GenerateJwtToken(UserDto user)
+    public string GenerateJwtToken(UserEntity user)
     {
         var claims = new[]
         {
@@ -35,7 +35,7 @@ public class TokenService(
             rng.GetBytes(randomBytes);
         }
 
-        var expiredTime = DateTime.UtcNow.AddMinutes(10);
+        var expiredTime = DateTime.UtcNow.AddMinutes(1);
 
         var newBytes = Encoding.UTF8.GetBytes(userName + _delimiter + expiredTime.ToString() + _delimiter).Concat(randomBytes).ToArray();
         return Convert.ToBase64String(newBytes);
@@ -43,34 +43,26 @@ public class TokenService(
 
     public (string userName, DateTime utcnow) GetUserNameFromRefreshToken(string refreshToken)
     {
-        try
+        refreshToken = Encoding.UTF8.GetString(Convert.FromBase64String(refreshToken));
+        int separatorIndex = refreshToken.LastIndexOf(_delimiter);
+
+        if (separatorIndex == -1)
         {
-            refreshToken = Encoding.UTF8.GetString(Convert.FromBase64String(refreshToken));
-            int separatorIndex = refreshToken.LastIndexOf(_delimiter);
-
-            if (separatorIndex == -1)
-            {
-                throw new ArgumentException("Invalid refresh token format.");
-            }
-
-            var userNamePlusUtcNow = refreshToken.Substring(0, separatorIndex);
-
-            separatorIndex = userNamePlusUtcNow.LastIndexOf(_delimiter);
-
-            if (separatorIndex == -1)
-            {
-                throw new ArgumentException("Invalid refresh token format.");
-            }
-
-            var userName = userNamePlusUtcNow.Substring(0, separatorIndex);
-            var UtcNow = userNamePlusUtcNow.Replace(userName + _delimiter, string.Empty);
-
-            return (userName, DateTime.Parse(UtcNow));
+            throw new ArgumentException("Invalid refresh token format.");
         }
-        catch (Exception ex)
+
+        var userNamePlusUtcNow = refreshToken.Substring(0, separatorIndex);
+
+        separatorIndex = userNamePlusUtcNow.LastIndexOf(_delimiter);
+
+        if (separatorIndex == -1)
         {
-            // log exception
-            throw;
+            throw new ArgumentException("Invalid refresh token format.");
         }
+
+        var userName = userNamePlusUtcNow.Substring(0, separatorIndex);
+        var datetimeToken = userNamePlusUtcNow.Replace(userName + _delimiter, string.Empty);
+
+        return (userName, DateTime.Parse(datetimeToken));
     }
 }

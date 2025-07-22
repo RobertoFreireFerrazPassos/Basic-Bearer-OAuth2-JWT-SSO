@@ -1,4 +1,4 @@
-﻿namespace AuthAPI.Models;
+﻿namespace AuthAPI.DataContracts;
 
 public class LoginRequest
 {

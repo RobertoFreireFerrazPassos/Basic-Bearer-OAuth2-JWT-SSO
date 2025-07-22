@@ -3,8 +3,7 @@
 [Route("api/[controller]")]
 [ApiController]
 public class AuthController(
-        IUserService _userService,
-        ITokenService _tokenService
+        IAuthService _authService
     ) : Controller
 {
 
@@ -15,15 +14,15 @@ public class AuthController(
         {
             if (string.IsNullOrWhiteSpace(model.Username))
             {
-                return BadRequest("Invalid logout request.");
+                return BadRequest("Invalid username");
             }
 
-            _userService.CleanRefreshToken(model.Username);
+            _authService.CleanRefreshToken(model.Username);
             return Ok();
         }
         catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, null);
+            return BadRequest(ex.Message);
         }
     }
 
@@ -37,22 +36,11 @@ public class AuthController(
                 return BadRequest("Invalid login request.");
             }
 
-            var user = _userService.Authenticate(model.Username, model.Password);
-
-            if (user == null)
-            {
-                return Unauthorized("Invalid credentials.");
-            }
-
-            var token = _tokenService.GenerateJwtToken(user);
-            var refreshToken = _tokenService.GenerateRefreshToken(user.Username);
-            _userService.SaveRefreshToken(user.Username, refreshToken);
-
-            return Ok(new { Token = token, RefreshToken = refreshToken });
+            return Ok(_authService.Authenticate(model.Username, model.Password));
         }
         catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, null);
+            return BadRequest(ex.Message);
         }
     }
 
@@ -63,39 +51,14 @@ public class AuthController(
         {
             if (string.IsNullOrWhiteSpace(accessTokenRequest?.RefreshToken))
             {
-                return BadRequest("Invalid");
+                return BadRequest("Invalid refresh token.");
             }
 
-            var (userName, datetimeToken) = _tokenService.GetUserNameFromRefreshToken(accessTokenRequest?.RefreshToken);
-
-            if (string.IsNullOrWhiteSpace(userName))
-            {
-                return BadRequest("Invalid");
-            }
-
-            var refreshTokenFromDb = _userService.GetRefreshToken(userName, datetimeToken);
-
-            if (string.IsNullOrWhiteSpace(refreshTokenFromDb) || accessTokenRequest.RefreshToken != refreshTokenFromDb)
-            {
-                return BadRequest("Invalid");
-            }
-
-            var user = _userService.GetUser(userName);
-
-            if (user == null)
-            {
-                return BadRequest("Invalid");
-            }
-
-            var newToken = _tokenService.GenerateJwtToken(user);
-            var refreshToken = _tokenService.GenerateRefreshToken(user.Username);
-            _userService.SaveRefreshToken(user.Username, refreshToken);
-
-            return Ok(new { Token = newToken, RefreshToken = refreshToken });
+            return Ok(_authService.GetTokenByGetRefreshtoken(accessTokenRequest.RefreshToken));         
         }
         catch (Exception ex)
         {
-            return StatusCode(StatusCodes.Status500InternalServerError, null);
+            return BadRequest(ex.Message);
         }
     }
 }
