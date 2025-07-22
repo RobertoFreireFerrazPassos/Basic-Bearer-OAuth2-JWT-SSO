@@ -1,9 +1,9 @@
 {
 	"info": {
-		"_postman_id": "73e3b10a-31be-4756-be7c-1ee15793f024",
+		"_postman_id": "5a6aab17-9ec9-4168-8fc7-c3ca20598fc1",
 		"name": "Tests",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "33874784"
+		"_exporter_id": "6421780"
 	},
 	"item": [
 		{
@@ -16,9 +16,15 @@
 							"if (pm.response.code === 200) {\r",
 							"    var jsonResponse = pm.response.json();\r",
 							"    var token = jsonResponse.token;\r",
-							"    var refreshToken = jsonResponse.refreshToken;    \r",
-							"    pm.environment.set(\"authToken\", token);\r",
-							"    pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"    var refreshToken = jsonResponse.refreshToken;\r",
+							"\r",
+							"    if (pm.environment.name) {\r",
+							"        pm.environment.set(\"authToken\", token);\r",
+							"        pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"        console.log(\"Tokens saved to environment: \" + pm.environment.name);\r",
+							"    } else {\r",
+							"        console.error(\"No environment selected. Please create and select an environment to store tokens.\");\r",
+							"    }\r",
 							"}"
 						],
 						"type": "text/javascript",
@@ -65,8 +71,14 @@
 							"    var jsonResponse = pm.response.json();\r",
 							"    var token = jsonResponse.token;\r",
 							"    var refreshToken = jsonResponse.refreshToken;\r",
-							"    pm.environment.set(\"authToken\", token);\r",
-							"    pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"\r",
+							"    if (pm.environment.name) {\r",
+							"        pm.environment.set(\"authToken\", token);\r",
+							"        pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"        console.log(\"Tokens saved to environment: \" + pm.environment.name);\r",
+							"    } else {\r",
+							"        console.error(\"No environment selected. Please create and select an environment to store tokens.\");\r",
+							"    }\r",
 							"}"
 						],
 						"type": "text/javascript",

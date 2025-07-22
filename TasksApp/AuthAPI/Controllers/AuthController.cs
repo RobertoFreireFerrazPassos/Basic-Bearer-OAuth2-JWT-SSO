@@ -23,7 +23,6 @@ public class AuthController(
         }
         catch (Exception ex)
         {
-            // Log exception
             return StatusCode(StatusCodes.Status500InternalServerError, null);
         }
     }
@@ -53,7 +52,6 @@ public class AuthController(
         }
         catch (Exception ex)
         {
-            // Log exception
             return StatusCode(StatusCodes.Status500InternalServerError, null);
         }
     }
@@ -95,7 +93,6 @@ public class AuthController(
         }
         catch (Exception ex)
         {
-            // Log exception
             return StatusCode(StatusCodes.Status500InternalServerError, null);
         }
     }

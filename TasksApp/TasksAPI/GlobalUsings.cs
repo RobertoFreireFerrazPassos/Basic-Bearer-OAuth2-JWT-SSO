@@ -6,3 +6,4 @@ global using Microsoft.AspNetCore.Mvc;
 global using System.Text;
 
 global using TasksAPI.Model;
+global using TasksAPI.Enum;
