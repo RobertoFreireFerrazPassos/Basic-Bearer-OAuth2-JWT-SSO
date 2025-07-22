@@ -23,9 +23,9 @@ Warning: The "Basic" authentication scheme used in the diagram above sends the c
 
 # Bearer
 
-# OAuth2
+Bearer token authentication is a method where an access token (the "bearer token") is used to authorize access to protected resources. The client presents the token in the Authorization header of HTTP requests, and the server validates the token to determine if access should be granted. Essentially, the token acts as a "key" that allows the bearer to access resources without needing to repeatedly authenticate
 
-# SSO
+Next, Bearer by using JWT token 
 
 # JWT
 
@@ -101,3 +101,8 @@ Reason of using Refresh token:
   |        |               & Refresh Token             |               |
   +--------+                                           +---------------+
   ```
+
+# OAuth2
+
+
+# SSO
