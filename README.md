@@ -61,6 +61,8 @@ signature is used to validate if the JWT is valid
 
 ![JWT](./image-1.png)
 
+Warning: JWT is encoded but not encrypted. Don't add any credentials/sensitive information here.
+
 ## Flow
 
 * Client sends user credentials and server sends back JWT to client if user is authenticated
