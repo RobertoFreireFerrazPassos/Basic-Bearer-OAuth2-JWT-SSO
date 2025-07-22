@@ -1,17 +1,16 @@
 # Basic
 
 ```
-  +--------+                                  +----------------+
-  |        |--(A)-- Request with              |                |
-  |        |         Authorization header --> |                |
-  |        |         (Basic Base64)           |                |
-  | Client |                                  |     Server     |
-  |        |<-(B)-- Response 401 Unauthorized |                |
-  |        |         (if auth fails)          |                |
-  |        |                                  |                |
-  |        |<-(C)-- Response 200 OK           |                |
-  |        |         (if auth succeeds)       |                |
-  +--------+                                  +----------------+
+  +--------+                                                             +----------------+
+  |        |--(A)-- Request with Authorization header (Basic Base64) --> |                |
+  |        |                                                             |                |
+  |        |                                                             |                |
+  | Client |                                                             |     Server     |
+  |        |<-(B)-- Response 401 Unauthorized (if auth fails) ---------- |                |
+  |        |                                                             |                |
+  |        |<-(C)-- Response 200 OK (if auth succeeds) ----------------- |                |
+  |        |                                                             |                |
+  +--------+                                                             +----------------+
 
   Notes:
   - (A) Client sends username and password encoded in Base64 via the Authorization header.
