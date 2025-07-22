@@ -1,5 +1,27 @@
 # Basic
 
+```
+  +--------+                                 +----------------+
+  |        |--(A)-- Request with              |                |
+  |        |         Authorization header --> |                |
+  |        |         (Basic Base64)           |                |
+  | Client |                                 |     Server     |
+  |        |<-(B)-- Response 401 Unauthorized |                |
+  |        |         (if auth fails)         |                |
+  |        |                                 |                |
+  |        |<-(C)-- Response 200 OK           |                |
+  |        |         (if auth succeeds)      |                |
+  +--------+                                 +----------------+
+
+  Notes:
+  - (A) Client sends username and password encoded in Base64 via the Authorization header.
+        Example: `Authorization: Basic dXNlcjpwYXNz`
+  - (B) If credentials are incorrect or missing, the server responds with 401 Unauthorized.
+  - (C) If credentials are valid, the server grants access to the requested resource.
+```
+
+Warning: The "Basic" authentication scheme used in the diagram above sends the credentials encoded but not encrypted. This would be completely insecure unless the exchange was over a secure connection (HTTPS/TLS).
+
 # Bearer
 
 # OAuth2
@@ -75,5 +97,6 @@ Reason of using Refresh token:
   |        |--(G)----------- Refresh Token ----------->|               |
   |        |                                           |               |
   |        |<-(H)----------- New Access Token ---------|               |
+  |        |               & Refresh Token             |               |
   +--------+                                           +---------------+
   ```
