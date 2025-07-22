@@ -88,8 +88,10 @@ public class AuthController(
             }
 
             var newToken = _tokenService.GenerateJwtToken(user);
+            var refreshToken = _tokenService.GenerateRefreshToken(user.Username);
+            _userService.SaveRefreshToken(user.Username, refreshToken);
 
-            return Ok(new { Token = newToken });
+            return Ok(new { Token = newToken, RefreshToken = refreshToken });
         }
         catch (Exception ex)
         {

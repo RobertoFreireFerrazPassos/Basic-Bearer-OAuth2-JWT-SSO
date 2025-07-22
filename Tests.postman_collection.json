@@ -121,7 +121,19 @@
 					"listen": "test",
 					"script": {
 						"exec": [
-							""
+							"if (pm.response.code === 200) {\r",
+							"    var jsonResponse = pm.response.json();\r",
+							"    var token = jsonResponse.token;\r",
+							"    var refreshToken = jsonResponse.refreshToken;\r",
+							"\r",
+							"    if (pm.environment.name) {\r",
+							"        pm.environment.set(\"authToken\", token);\r",
+							"        pm.environment.set(\"refreshToken\", refreshToken);\r",
+							"        console.log(\"Tokens saved to environment: \" + pm.environment.name);\r",
+							"    } else {\r",
+							"        console.error(\"No environment selected. Please create and select an environment to store tokens.\");\r",
+							"    }\r",
+							"}"
 						],
 						"type": "text/javascript",
 						"packages": {}

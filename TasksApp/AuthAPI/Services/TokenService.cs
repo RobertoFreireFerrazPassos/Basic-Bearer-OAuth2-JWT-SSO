@@ -35,7 +35,7 @@ public class TokenService(
             rng.GetBytes(randomBytes);
         }
 
-        var expiredTime = DateTime.UtcNow.AddMinutes(10);
+        var expiredTime = DateTime.UtcNow.AddMinutes(1);
 
         var newBytes = Encoding.UTF8.GetBytes(userName + _delimiter + expiredTime.ToString() + _delimiter).Concat(randomBytes).ToArray();
         return Convert.ToBase64String(newBytes);
