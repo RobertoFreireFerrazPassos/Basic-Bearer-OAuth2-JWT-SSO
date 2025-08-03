@@ -106,3 +106,8 @@ Reason of using Refresh token:
 
 
 # SSO
+
+
+# References
+
+https://www.youtube.com/watch?v=9JPnN1Z_iSY&ab_channel=HaykSimonyan
